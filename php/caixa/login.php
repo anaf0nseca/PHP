@@ -20,7 +20,7 @@
 
         echo "<script>alert('Email ou senha incorretos');</script>";
         $tentativas++;
-        header('Location: ./login.php');
+        //header('Location: ./login.php');
         if($tentativas == 3){
             //echo "<script>document.getElementById("botao").disabled = true;</script>"
             echo "<script>alert('Você atingiu o limite de tentativas');</script>";
