@@ -1,5 +1,5 @@
 <?php
-    //Para incluir o documento com a conexão do banco
+    //Para incluir o documento com a conexão do banco.
     include("conexao.php");
 
     $sql = "SELECT id, nome, usuario, saldo FROM contas";
