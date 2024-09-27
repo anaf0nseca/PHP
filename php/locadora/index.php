@@ -8,10 +8,15 @@
     <title>Document</title>
 </head>
 <body>
-<table class="table table-striped">
-  <thead>
+<?php include("conexao.php"); ?>
+<form action="inserir.php">
+
+<input type="submit" class="btn btn-success m-1 pr-3 pl-3" name='action' value='Inserir novo filme'>
+</form>
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
     <tr>
-      <th scope="col">ID</th>
+      <th scope="col-sm-1">ID</th>
       <th scope="col">Filme</th>
       <th scope="col">Gênero</th>
       <th scope="col">Indicação</th>
@@ -20,17 +25,21 @@
       <th scope="col">Diretor</th>
       <th scope="col">Produtora</th>
       <th scope="col">Valor</th>
+      <th scope="col">Ação</th>
+
     </tr>
   </thead>
   <tbody>
+
     <?php
-        include("conexao.php");
-        $select = "SELECT * from produtos;"
+
+        $select = "SELECT * from produtos";
         $filmes = $conn->query($select);
         if(!empty($filmes))
         while($row = $filmes->fetch_assoc()){
             //Exibe as informações de cada linha do banco, dentro da tabela
-            echo "<tr><td>".$row["id"]."</td>
+            echo 
+            "<tr><td>".$row["id"]."</td>
             <td>".$row["filme"]."</td>
             <td>".$row["genero"]."</td>
             <td>".$row["indicacao"]."</td>
@@ -39,8 +48,9 @@
             <td>".$row["diretor"]."</td>
             <td>".$row["produtora"]."</td>
             <td>".$row["valor"]."</td>
-    
-            <form action='index.php' method='POST'>
+            
+            <td>
+            <form action='deletar.php' method='POST'>
             <input type='hidden' name='id' value='".$row["id"]."'>
             <input type='hidden' name='filme' value='".$row["filme"]."'>
             <input type='hidden' name='genero' value='".$row["genero"]."'>
@@ -48,35 +58,21 @@
             <input type='hidden' name='lancamento' value='".$row["lancamento"]."'>
             <input type='hidden' name='duracao' value='".$row["duracao"]."'>
             <input type='hidden' name='diretor' value='".$row["diretor"]."'>
-            <input type='hidden' name='produtora' value='".$row["produtora"]."'>
-            <input type='hidden' name='valor' value='".$row["valor"]."'>
+            <input type='hidden' name='produtora' value='R$'.'".$row["produtora"]."'>
+            <input type='hidden' name='valor' value='R$".$row["valor"]."'>
+            <input type='submit' class='btn btn-info' name='action' value='Alterar'>
+            <input type='submit' class='btn btn-danger'name='action' value='Deletar'>
+
+              </td>
     
-            <input type='submit'name='action' value='Selecionar'>
-    
-            <input type='submit'name='action' value='Deletar'>
             </form>
             </tr>";
         }
+
+
     ?>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
   </tbody>
 </table>
 </body>
 </html>
+

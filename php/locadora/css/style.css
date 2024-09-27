@@ -1,0 +1,16 @@
+#insert-form{
+    width: 400px;
+    height: 500px;
+    background-color: gray;
+    border-radius: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+}
+
+.form{
+
+    color: aliceblue;
+}
