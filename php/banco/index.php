@@ -12,39 +12,60 @@
 <?php
     include("conexao.php");
 
-    //
+    $cnome = "";
+    $cusuario = "";
+    $csaldo = "";
+    $csenha = "";
     
     //Verifica se os campos do formulário não estão vazios e armazena os valores em variaveis
     if(!empty($_POST['nome']) && !empty($_POST['usuario']) && !empty($_POST['senha']) && !empty($_POST['saldo'])){
+        //Armazena os dados em variaveis
+        $id = $_POST['id'];
         $nome = $_POST['nome'];
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
         $saldo = $_POST['saldo'];
+        //Verifica se o botão clicado foi "Cadastrar"
         if($_POST['action'] == 'Cadastrar'){
             
             $insert = "INSERT into contas (nome, usuario, senha, saldo) values ('$nome', '$usuario', '$senha', $saldo )";
             //Insere os valores no banco
             $conn->query($insert);
             
+        //Verifica se o botão clicado foi "Atualizar"
         }else if($_POST['action'] == 'Atualizar'){
+            //echo "<script>alert('$id');</script>";
             $update = "UPDATE contas set nome = '$nome', usuario = '$usuario', senha = '$senha', saldo = $saldo where id = ".$_POST['id'];
             $conn->query($update);
-            
+        }elseif ($_POST['action'] == 'Limpar'){
+            $cnome = "";
+            $cusuario = "";
+            $csaldo = "";
+            $csenha = "";
         }
     }
     
+    //Verifica se o campo 'id' tem valor
     if(!empty($_POST['id'])){
+        //Verifica se o botão clicado foi "Deletar"
         if($_POST['action'] == 'Deletar'){
             $delete = "DELETE FROM contas where id=".$_POST['id'];
             $conn->query($delete);
 
+
+        //Verifica se o botão clicado foi "Selecionar"
         }else if($_POST['action'] == 'Selecionar'){
             $select = "SELECT * from contas where id=".$_POST['id'];
-            $conn->query($select);
-            $nome = $_POST['nome'];
-            $usuario = $_POST['usuario'];
-            $senha = $_POST['senha'];
-            $saldo = $_POST['saldo'];
+            $dado = $conn->query($select);
+            if(!empty($dado)){
+                while($cliente = $dado->fetch_assoc()){
+                    $cnome = $cliente["nome"];
+                    $cusuario = $cliente["usuario"];
+                    $csaldo = $cliente["saldo"];
+                    $csenha = $cliente["senha"];
+
+                }
+            }
 
         }
 
@@ -81,12 +102,16 @@
 ?>
    <!-- Direciona para a mesma pagina, assim as informações do usuário são recarregadas-->
 <form action="index.php" method="POST">
-    Nome: <input type="text" name="nome" value="<?php echo $_POST['nome']; ?>"><br>
-    Usuário: <input type="text" name="usuario" value="<?php echo $usuario; ?>"><br>
-    Senha: <input type="text" name="senha" value="<?php echo $senha; ?>"><br>
-    Saldo: <input type="number" step="0.01" name="saldo" value="<?php echo $saldo; ?>" ><br>
+    <input type='hidden' name='id' value="<?php echo $_POST['id']; ?>">
+
+    Nome: <input type="text" name="nome" value="<?php echo $cnome; ?>"><br>
+    Usuário: <input type="text" name="usuario" value="<?php echo $cusuario; ?>"><br>
+    Senha: <input type="text" name="senha" value="<?php echo $csenha; ?>"><br>
+    Saldo: <input type="number" step="0.01" name="saldo" value="<?php echo $csaldo; ?>" ><br>
     <input type='submit' name='action' value='Atualizar'>
-    <input type="submit" name='action' value="Cadastrar">    
+    <input type="submit" name='action' value="Cadastrar">   
+    <input type="submit" name='action' value="Limpar">    
+
 </form>
 
 </body>
