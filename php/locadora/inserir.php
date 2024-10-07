@@ -10,15 +10,15 @@
 <body>
     <?php include("conexao.php"); ?>
     <div id="insert-form">
-        <form action="index.php" class="form">
+        <form action="inserir.php" class="form" method="POST">
             Filme: <input type="text" class="m-2"  name="filme"  ><br>
             Gênero: <input type="text" class="m-2"  name="genero"><br>
             Indicação: <input type="text" class="m-2"  name="indicacao"><br>
-            Lançamento: <input type="number" class="m-2"  name="lancamento" ><br>
-            Duração: <input type="number" class="m-2"  name="duracao"><br>
-            Diretor: <input type="text" class="m-2"  name="diretor"    ><br>
+            Lançamento: <input type="text" class="m-2"  name="lancamento" ><br>
+            Duração: <input type="text" class="m-2"  name="duracao"><br>
+            Diretor: <input type="text" class="m-2"  name="diretor"><br>
             Produtora: <input type="text" class="m-2"  name="produtora" ><br>
-            Valor: <input type="number" step="0.01" class="m-2"  name="valor"><br>
+            Valor: <input type="text" step="0.01" class="m-2"  name="valor"><br>
             <input type="submit" class="btn btn-info" value="Cadastrar">    
 
         </form>
@@ -44,9 +44,16 @@
         $diretor = $_POST['diretor'];
         $produtora = $_POST['produtora'];
         $valor = $_POST['valor'];
+        
 
-        $insert = "INSERT into produtos(filme, genero, indicacao, lancamento, duracao, diretor, produtora, valor) values('$filme', '$genero', '$indicacao', $lancamento, $duracao, '$diretor', '$produtora', $valor)";
-        $conn->query($insert);
+            $insert = "INSERT into produtos(
+            filme, genero, indicacao, lancamento, duracao, diretor, produtora, valor) 
+            values('$filme', '$genero', '$indicacao', $lancamento, $duracao, '$diretor', '$produtora', $valor)";
+            $retorno = $conn->query($insert);
+        
+
+        header('location: index.php');
+    
     }
     ?>
 </body>

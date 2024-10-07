@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<?php include("conexao.php"); ?>
+
 <form action="inserir.php">
 
 <input type="submit" class="btn btn-success m-1 pr-3 pl-3" name='action' value='Inserir novo filme'>
@@ -26,16 +26,29 @@
       <th scope="col">Produtora</th>
       <th scope="col">Valor</th>
       <th scope="col">Ação</th>
+      <th scope="col">Ação</th>
 
     </tr>
   </thead>
   <tbody>
 
     <?php
+      include("conexao.php"); 
+              
+        
 
+    
+        // }else if ($_POST['action'] == 'Alterar'){
+        //   header("location: atualizar.php");
+        // }
+
+        // }
         $select = "SELECT * from produtos";
+
         $filmes = $conn->query($select);
-        if(!empty($filmes))
+
+        if(!empty($filmes)){
+
         while($row = $filmes->fetch_assoc()){
             //Exibe as informações de cada linha do banco, dentro da tabela
             echo 
@@ -50,23 +63,26 @@
             <td>".$row["valor"]."</td>
             
             <td>
+            <form action='atualizar.php' method='GET'>
+            <input type='hidden' name='id' value='".$row["id"]."'>
+            <a href='atualizar.php?id=".$row['id']."'><button class='btn btn-info'>Alterar</button></a>
+            </td>
+            </form>
+
+
+            <td>
             <form action='deletar.php' method='POST'>
             <input type='hidden' name='id' value='".$row["id"]."'>
-            <input type='hidden' name='filme' value='".$row["filme"]."'>
-            <input type='hidden' name='genero' value='".$row["genero"]."'>
-            <input type='hidden' name='indicacao' value='".$row["indicacao"]."'>
-            <input type='hidden' name='lancamento' value='".$row["lancamento"]."'>
-            <input type='hidden' name='duracao' value='".$row["duracao"]."'>
-            <input type='hidden' name='diretor' value='".$row["diretor"]."'>
-            <input type='hidden' name='produtora' value='R$'.'".$row["produtora"]."'>
-            <input type='hidden' name='valor' value='R$".$row["valor"]."'>
-            <input type='submit' class='btn btn-info' name='action' value='Alterar'>
-            <input type='submit' class='btn btn-danger'name='action' value='Deletar'>
+            <input type='submit' class='btn btn-danger' name='action' value='Deletar'>
 
-              </td>
-    
+            </td>
             </form>
+
+
             </tr>";
+        }
+
+
         }
 
 
@@ -75,4 +91,12 @@
 </table>
 </body>
 </html>
-
+<!-- 
+            <input type='hidden' name='filme' value='".$row["filme"]."'>
+            <input type='hidden' name='genero' value='".$row["genero"]."'>
+            <input type='hidden' name='indicacao' value='".$row["indicacao"]."'>
+            <input type='hidden' name='lancamento' value='".$row["lancamento"]."'>
+            <input type='hidden' name='duracao' value='".$row["duracao"]."'>
+            <input type='hidden' name='diretor' value='".$row["diretor"]."'>
+            <input type='hidden' name='produtora' value='R$'.'".$row["produtora"]."'>
+            <input type='hidden' name='valor' value='R$".$row["valor"]."'> -->
