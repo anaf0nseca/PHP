@@ -1,13 +1,19 @@
-#insert-form{
-    width: 400px;
+#insert-form, #update-form {
+    margin: 5px;
+    width: 350px;
     height: 500px;
-    background-color: gray;
+    background-color: #023e8a;
     border-radius: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 
+}
+
+input{
+    width:60%;
+    margin: 5px;
 }
 
 .form{

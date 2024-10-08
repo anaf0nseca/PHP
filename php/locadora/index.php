@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Lista de filmes</title>
 </head>
 <body>
 
@@ -34,21 +34,13 @@
 
     <?php
       include("conexao.php"); 
-              
-        
-
-    
-        // }else if ($_POST['action'] == 'Alterar'){
-        //   header("location: atualizar.php");
-        // }
-
-        // }
+        //Retorna todos os filmes
         $select = "SELECT * from produtos";
-
+        //Armazena os valores em uma variavel
         $filmes = $conn->query($select);
 
         if(!empty($filmes)){
-
+        //Percorre as linhas da tabela e exibe na tela
         while($row = $filmes->fetch_assoc()){
             //Exibe as informações de cada linha do banco, dentro da tabela
             echo 
@@ -61,6 +53,7 @@
             <td>".$row["diretor"]."</td>
             <td>".$row["produtora"]."</td>
             <td>".$row["valor"]."</td>
+            
             
             <td>
             <form action='atualizar.php' method='GET'>
@@ -91,12 +84,3 @@
 </table>
 </body>
 </html>
-<!-- 
-            <input type='hidden' name='filme' value='".$row["filme"]."'>
-            <input type='hidden' name='genero' value='".$row["genero"]."'>
-            <input type='hidden' name='indicacao' value='".$row["indicacao"]."'>
-            <input type='hidden' name='lancamento' value='".$row["lancamento"]."'>
-            <input type='hidden' name='duracao' value='".$row["duracao"]."'>
-            <input type='hidden' name='diretor' value='".$row["diretor"]."'>
-            <input type='hidden' name='produtora' value='R$'.'".$row["produtora"]."'>
-            <input type='hidden' name='valor' value='R$".$row["valor"]."'> -->

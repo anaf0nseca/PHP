@@ -13,15 +13,6 @@ if($conn->connect_error){
 }
  //echo"Conectado com sucesso."; 
 
-
-// $dsn = 'mysql:host=localhost;dbname=locadora';
-// $user = 'root';
-// $pass = '';
-
-// $conn = new PDO($dsn, $user, $pass);
-
-// $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
  ?>
 
 
