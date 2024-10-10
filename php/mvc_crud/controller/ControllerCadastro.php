@@ -14,7 +14,7 @@ class cadastroController{
         $this->cadastro->setAutor($_POST['autor']);
         $this->cadastro->setQuantidade($_POST['quantidade']);
         $this->cadastro->setPreco($_POST['preco']);
-        $this->cadastro->setData(date('Y-m-d', strtotime($_POST['preco'])));
+        $this->cadastro->setData(date('Y-m-d', strtotime($_POST['data'])));
 
         $result= $this->cadastro->incluir();
 
