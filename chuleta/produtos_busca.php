@@ -1,4 +1,11 @@
 <!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
+<?php
+    include "conn/connect.php"; //conecta banco.
+    $busca = $_GET['buscar'];
+    $listaBusca = $conn -> querry ("select * from produtos where descrição like '%$busca%' or resumo like '%$busca%' order by descricao asc");
+    $rowBusca = $listBusca -> fetch_assoc();
+    $numLinhas = $listaBusca -> num_rows;
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -22,6 +29,10 @@
             </h2>
         <?php }?>
         <!-- mostrar se a consulta retornou produtos  -->
+        <?php
+            if($numLinhas>0)
+            {
+        ?>
         
             <h2 class="breadcrumb alert-danger">
                 <a href="javascript:window.history.go(-1)" class="btn btn-danger">
@@ -31,6 +42,10 @@
             </h2>
             <div class="row">
                 <!-- COMEÇO DO LAÇO -->
+                <?php
+                    do
+                    {
+                ?>
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
                             <a href="produto_detalhes.php?id=<?php echo $rowBusca['id']?>">
@@ -59,8 +74,18 @@
 
                             
                         </div>
+
+                        <?php
+                            }
+                            while ($rowBusca = $listaBusca -> fetch_assoc());
+                        ?>
+
                     </div>
+
                 <!-- FIM DO LAÇO -->
+                <?php
+                    }
+                ?>
             </div>
         
     </div>

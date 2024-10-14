@@ -3,7 +3,7 @@
 include 'acesso_com.php';
 include '../conn/connect.php';
 
-$lista = $conn->query("select * from produtos");
+$lista = $conn->query("select * from vw_produtos");
 $row = $lista->fetch_assoc();
 $rows = $lista->num_rows;
 
@@ -63,7 +63,7 @@ $rows = $lista->num_rows;
                             if($row['destaque'] == 'Sim'){
                                 echo "<span class='glyphicon glyphicon-star text-danger' aria-hidden='true'></span>";
                             }else{
-                                echo "<span class='glyphicon glyphicon-ok text-danger' aria-hidden='true'></span>";
+                                echo "<span class='glyphicon glyphicon-ok text-success' aria-hidden='true'></span>";
 
                             }
 
@@ -130,7 +130,7 @@ $rows = $lista->num_rows;
                     <h4><span class="nome text-danger"></span></h4>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" type="button" class="btn btn-danger delete-yes">
+                    <a href="produtos_excluir.php" type="button" class="btn btn-danger delete-yes">
                         Confirmar
                     </a>
                     <button class="btn btn-success" data-dismiss="modal">

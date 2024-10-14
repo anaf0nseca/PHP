@@ -70,7 +70,11 @@ $numLinhas = $listaTipo->num_rows;
                             </span>
                             <select name="id_tipo" id="id_tipo" class="form-control" required>
                                 <!-- COMEÇO DO LAÇO -->
-                                    
+                                <?php do{ ?>
+                                    <option value="<?php echo $rowTipo['id']; ?>">
+                                    <?php echo $rowTipo['rotulo']; ?>
+                                    </option>
+                                <?php }while($rowTipo = $listaTipo->fetch_assoc()); ?>        
                                 
                                 <!-- FIM DO LAÇO -->
                             </select>
